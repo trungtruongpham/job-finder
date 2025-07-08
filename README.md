@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobFinder - AI-Powered Job Search Platform
 
-## Getting Started
+A modern SaaS job search platform built with Next.js 15, featuring AI-powered job matching, Supabase authentication, and a beautiful UI.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Core Features
+
+- **AI-Powered Job Search**: Advanced algorithms that match candidates with relevant opportunities
+- **Real-time Alerts**: Instant notifications for new job postings that match user criteria
+- **Application Tracking**: Comprehensive dashboard to track job application progress
+- **Company Insights**: Detailed company profiles with culture and hiring information
+- **Career Analytics**: Market trends, salary insights, and career progression data
+
+### Authentication & Security
+
+- **Email/Password Authentication**: Secure login with validation
+- **OAuth Integration**: Sign in with Google
+- **Password Reset**: Secure password recovery via email
+- **Session Management**: Persistent authentication with Supabase
+- **Data Protection**: Enterprise-grade security and privacy controls
+
+### SaaS Features
+
+- **Multiple Pricing Tiers**: Free, Pro, and Enterprise plans
+- **Feature-based Access**: Different capabilities per subscription level
+- **Professional UI**: Modern, responsive design with dark/light mode
+- **Mobile Optimized**: Fully responsive across all devices
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Authentication**: Supabase Auth
+- **Database**: Supabase (PostgreSQL)
+- **UI Components**: Shadcn/ui + Radix UI
+- **Styling**: Tailwind CSS
+- **Validation**: Zod
+- **Type Safety**: TypeScript
+- **Theme**: next-themes for dark/light mode
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── (auth)/            # Authentication pages group
+│   │   ├── login/         # Login page
+│   │   ├── signup/        # Registration page
+│   │   └── forgot-password/ # Password reset
+│   ├── about/             # About us page
+│   ├── features/          # Features showcase
+│   ├── pricing/           # Pricing plans
+│   └── auth/callback/     # OAuth callback handler
+├── components/            # Reusable components
+│   ├── ui/               # Shadcn UI components
+│   ├── layout/           # Layout components (header, footer)
+│   ├── login-form.tsx    # Login form component
+│   ├── signup-form.tsx   # Registration form
+│   └── forgot-password-form.tsx
+├── lib/                  # Utility libraries
+│   ├── actions/          # Server actions
+│   │   └── auth.ts      # Authentication actions
+│   ├── supabase/        # Supabase client setup
+│   │   ├── client.ts    # Browser client
+│   │   └── server.ts    # Server client
+│   └── utils.ts         # Utility functions
+└── types/               # TypeScript type definitions
+    ├── actions.ts       # Action response types
+    └── supabase.ts      # Database schema types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Setup & Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone <repository-url>
+   cd job-finder
+   ```
 
-## Learn More
+2. **Install dependencies**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Environment Variables**
+   Create a `.env.local` file with your Supabase credentials:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   ```
 
-## Deploy on Vercel
+4. **Database Setup**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - Create a Supabase project
+   - Run the SQL migrations for user profiles table
+   - Configure OAuth providers (Google) in Supabase dashboard
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+## 🔐 Authentication Flow
+
+1. **Email/Password**: Traditional signup/login with validation
+2. **OAuth (Google)**: One-click social authentication
+3. **Password Reset**: Email-based password recovery
+4. **Session Management**: Automatic session handling with middleware
+5. **Protected Routes**: Middleware-based route protection
+
+## 💰 Pricing Plans
+
+- **Free**: 5 applications/month, basic features
+- **Pro ($19/month)**: Unlimited applications, AI search, premium features
+- **Enterprise ($49/month)**: Everything + career coaching, exclusive opportunities
+
+## 🎨 UI Components
+
+Built with a comprehensive design system:
+
+- Consistent typography and spacing
+- Professional color scheme
+- Responsive layouts
+- Accessible components
+- Dark/light theme support
+
+## 🚀 Deployment
+
+The application is ready for deployment on platforms like:
+
+- Vercel (recommended for Next.js)
+- Netlify
+- Railway
+- Any Node.js hosting provider
+
+## 📄 License
+
+This project is licensed under the MIT License.
