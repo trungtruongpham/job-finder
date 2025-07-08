@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { ActionResponse } from "@/types/actions";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { headers } from "next/headers";
 
 const loginSchema = z.object({
   email: z.string().email({
@@ -100,10 +101,16 @@ export async function loginAction(
 export async function oauthLogin(provider: "google") {
   const supabase = await createClient();
 
+  // Get the current domain from headers
+  const headersList = await headers();
+  const host = headersList.get("host") || "localhost:3000";
+  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+  const redirectUrl = `${protocol}://${host}/auth/callback`;
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+      redirectTo: redirectUrl,
       scopes: "https://www.googleapis.com/auth/userinfo.email",
       queryParams: {
         access_type: "offline",
@@ -215,8 +222,14 @@ export async function resetPasswordAction(
 
     const supabase = await createClient();
 
+    // Get the current domain from headers
+    const headersList = await headers();
+    const host = headersList.get("host") || "localhost:3000";
+    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+    const redirectUrl = `${protocol}://${host}/reset-password`;
+
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`,
+      redirectTo: redirectUrl,
     });
 
     if (error) {
